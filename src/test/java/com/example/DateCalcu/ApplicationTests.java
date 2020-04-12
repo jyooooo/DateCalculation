@@ -1,10 +1,10 @@
-package RaiseTech.DateCalculation;
+package com.example.DateCalcu;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DateCalculationApplicationTests {
+class ApplicationTests {
 
 	@Test
 	void contextLoads() {
