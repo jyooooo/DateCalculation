@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+<meta charset="UTF-8">
+
+
+
+<title>新規登録画面</title>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="..static/register.css"
+	th:href="@{/register.css}">
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript"
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<div class="main">
+		<div class="text">
+
+			<form th:method="POST" th:action="@{/create}" th:object="${domainform}" >
+				<p>日付ID</p>
+				<input type="text" name="dateId" th:field="*{dateId}" placeholder="NM01">
+				<span th:if="${#fields.hasErrors('dateId')}" th:errors="*{dateId}" ></span>
+
+ 				<p>日付名</p>
+				<input type="text"  name="dateName" th:field="*{dateName}" placeholder="来月">
+				<span th:if="${#fields.hasErrors('dateName')}" th:errors="*{dateName}" ></span>
+
+				<p>加減値(年)</p>
+				<input type="text" name="year"  th:field="*{year}" placeholder="1">
+				<span th:if="${#fields.hasErrors('year')}" th:errors="*{year}" ></span>
+
+				<p>加減値(月)</p>
+				<input type="text" name="month" th:field="*{month}" placeholder="1">
+				<span th:if="${#fields.hasErrors('month')}" th:errors="*{month}" ></span>
+
+				<p>加減値(日)</p>
+				<input type="text" name="date" th:field="*{date}" placeholder="0">
+				<span th:if="${#fields.hasErrors('date')}" th:errors="*{date}" ></span>
+
+				<input type="submit" value="登録" />
+			</form>
+			<a href="/">
+				<button type="button" class="btn btn-default btn-sm active">戻る</button>
+			</a>
+		</div>
+	</div>
+</body>
+
+
+</html>

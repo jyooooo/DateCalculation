@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+<meta charset="UTF-8">
+
+<title>日付計算アプリ</title>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="..static/index.css"
+	th:href="@{/index.css}">
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript"
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+	<form method="POST" th:action="@{/calcu}">
+		<div class="main">
+			<h3>計算の基準となる日付を入力してください。</h3>
+				<div class="form-group">
+<!-- 					<input type="email" th:field="${ReferenceDateForm.ReferenceDate}" placeholder="20200101"> -->
+				</div>
+			<h3>日付IDを入力してください。</h3>
+				<div class="form-group">
+<!-- 					<input type="email" th:field="${ReferenceDateForm.ReferenceDate}" placeholder="NM01"> -->
+				</div>
+		</div>
+		<div class="button">
+			<button type="button" class="btn btn-default btn-sm active">計算実行</button>
+			<a href="/register">
+				<button type="button" class="btn btn btn-danger btn-sm active">新規登録</button>
+			</a>
+		</div>
+	</form>
+
+
+	<div class="table">
+		<table class="table table-hover">
+			<tr>
+				<th>No.</th>
+				<th>日付ID</th>
+				<th>日付名</th>
+				<th> 年</th>
+				<th> 月</th>
+				<th> 日</th>
+				<th>編集</th>
+			</tr>
+			<!-- <tr th:each="Calulations:${Calulation}" th:object="${domain}" > -->
+			<!-- <tr th:each="calc:${Calulation}" > -->
+			<tr th:each="calc, stat : ${Calculation}" th:object="${calc}">
+
+				<th th:text="${stat.count}"></th>
+				<td th:text="*{dateId}"></td>
+				<td th:text="*{dateName}"></td>
+				<td th:text="*{year}"></td>
+				<td th:text="*{month}"></td>
+				<td th:text="*{date}"></td>
+
+				<td id="edit">
+				 <a th:href="@{/{dateId}/edit(dateId=*{dateId})}">更新</a>
+					<form th:action="@{/{dateId}(dateId=*{dateId})}" th:method="POST">
+						<input type="submit" value="削除">
+					</form></td>
+
+
+
+			</tr>
+
+		</table>
+	</div>
+
+</body>
+</html>
