@@ -26,15 +26,19 @@
 		<div class="main">
 			<h3>計算の基準となる日付を入力してください。</h3>
 				<div class="form-group">
-<!-- 					<input type="email" th:field="${ReferenceDateForm.ReferenceDate}" placeholder="20200101"> -->
+					<input type="text" th:field="${referencedateform.ReferenceDate}" placeholder="2020-01-01">
+					<!-- <span th:if="${#fields.hasErrors('ReferenceDate')}" th:errors="*{ReferenceDate}"></span> -->
+
 				</div>
 			<h3>日付IDを入力してください。</h3>
 				<div class="form-group">
-<!-- 					<input type="email" th:field="${ReferenceDateForm.ReferenceDate}" placeholder="NM01"> -->
+					<input type="text" th:field="${referencedateform.dateId}" placeholder="NM01">
+					<!-- <span th:if="${#fields.hasErrors('dateId')}" th:errors="*{dateId}"></span> -->
+
 				</div>
 		</div>
 		<div class="button">
-			<button type="button" class="btn btn-default btn-sm active">計算実行</button>
+			  	<input type="submit" value="計算実行">
 			<a href="/register">
 				<button type="button" class="btn btn btn-danger btn-sm active">新規登録</button>
 			</a>
@@ -48,9 +52,8 @@
 				<th>No.</th>
 				<th>日付ID</th>
 				<th>日付名</th>
-				<th> 年</th>
-				<th> 月</th>
-				<th> 日</th>
+				<th>計算結果</th>
+				<th> 計算式</th>
 				<th>編集</th>
 			</tr>
 			<!-- <tr th:each="Calulations:${Calulation}" th:object="${domain}" > -->
@@ -60,9 +63,8 @@
 				<th th:text="${stat.count}"></th>
 				<td th:text="*{dateId}"></td>
 				<td th:text="*{dateName}"></td>
-				<td th:text="*{year}"></td>
-				<td th:text="*{month}"></td>
-				<td th:text="*{date}"></td>
+				<td th:text="${referencedate}"></td>
+				<td th:text="*{year}+'/'+*{month}+'/'+*{date}"></td>
 
 				<td id="edit">
 				 <a th:href="@{/{dateId}/edit(dateId=*{dateId})}">更新</a>

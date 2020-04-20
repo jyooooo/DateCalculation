@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>入力画面</title>
+<link rel="stylesheet" type="text/css" href="../static/style.css"
+	th:href="@{style.css}">
+</head>
+<body>
+   <div class="calc-form">
+　　<form th:action="@{/calc}" th:object="${workDateCalcForm}" method="post">
+			<dl>
+				<dt>
+					<label for="data_input">日付を入力して下さい。</label>
+				</dt>
+				<dd>
+					<input type="date" name="data_input" th:field="*{inputDate}"> <span
+						th:if="${#fields.hasErrors('inputDate')}" th:errors="*{inputDate}"
+						class="error-input"></span>
+				</dd>
+				<dt>
+					<label for="id_input">IDを入力して下さい。</label>
+				</dt>
+				<dd>
+					<input type="text" name="id_input" th:field="*{id}">
+					<span th:if="${#fields.hasErrors('id')}" th:errors="*{id}"
+						class="error-input"></span>
+				</dd>
+			</dl>
+
+			   <input type="submit" name="calc_exec" value="計算実行" class="button-style">
+		       <input type="submit" name="reset" value="リセット" class="button-style">
+		</form>
+
+	<!--計算結果  -->
+		<p>計算結果</p>
+		<table>
+			<tr>
+				<th>id</th>
+				<th>日付ID</th>
+				<th>日付名</th>
+				<th>計算式</th>
+			</tr>
+
+			<tr th:object=${workDateType}>
+				<td th:text="${workDateType.id}">NM01</td>
+				<td th:text="${workDateType.workDateId}">NM01</td>
+				<td th:text="${workDateType.workDateName}">20200101</td>
+				<td th:text="${workDateType.inputAddOrSubYear}+'/'+${workDateType.inputAddOrSubMonth}+'/'+${workDateType.inputAddOrSubDay}"></td>
+			</tr>
+			<tr>
+				<th>計算結果</th>
+			</tr>
+			<tr th:object="${inputDate}">
+				<td th:text="${inputDate}">
+			</tr>
+		</table>
+		<hr>
+
+			<p>日付ID（計算式）</p>
+
+			<form th:action="@{/create}" method="get" class="display-inline">
+				<input type="submit" name="data_create" value="新規登録"
+					class="button-style">
+			</form>
+
+			 <form th:action="@{/search}" method="get" class="display-inline">
+				<input type="submit" name="data_search" value="検索"
+					class="button-style">
+			</form>
+			</div>
+
+			<p>一覧</p>
+	<table>
+		<tr>
+			<th>id</th>
+			<th>日付ID</th>
+			<th>日付名</th>
+			<th>計算式</th>
+		</tr>
+		<tr th:each="list: ${lists}" >
+			<td th:text="${list.id}">NM01</td>
+			<td th:text="${list.workDateId}">NM01</td>
+			<td th:text="${list.workDateName}">20200101</td>
+			<td th:text="${list.inputAddOrSubYear}+'/'+${list.inputAddOrSubMonth}+'/'+${list.inputAddOrSubDay}"></td>
+
+		<td class="submit">
+				<form th:action="@{/edit}" method="post">
+					<input type="submit" name="workDateTypeEdit" value="更新">
+					<input type="hidden" name="id" th:value="*{id}">
+				</form>
+		</td>
+			<td class="submit">
+				<form th:action="@{/delete}" method="post">
+					<input type="submit" value="削除" class="red-button"> <input type="hidden"
+						name="id" th:value="*{id}">
+				</form>
+			</td>
+
+		</tr>
+	</table>
+
+
+</body>
+</html>
