@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.DateCalcu.domain.DomainForm;
 import com.example.DateCalcu.domain.ReferenceDateForm;
 import com.example.DateCalcu.service.CalcuService;
 
@@ -17,6 +18,11 @@ public class IndexController {
 
 	@Autowired
 	public CalcuService calcuService;
+
+	@ModelAttribute
+	DomainForm domainForm() {
+		return new DomainForm();
+	}
 
 
 	//全件表示

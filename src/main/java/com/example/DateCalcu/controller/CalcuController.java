@@ -39,11 +39,11 @@ public class CalcuController {
 		//計算基準日と計算式を取得し、calculated(計算結果)にセット
 		results.stream().forEach(e -> e.setCalculated(calcuService.calculate(form.getReferenceDate(), e.getFormula())));
 
-		System.out.println("calcu処理に終了しました");
+		System.out.println(results);
 
 		model.addAttribute("results", results);
 
-		System.out.println(results);
+
 
 
 
