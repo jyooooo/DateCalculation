@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class DomainForm {
-
+//ReferenceDateFormへ移動
 	@NotBlank (message = "日付IDは必須項目です")
 	@Size(min = 1, max = 5, message = "日付IDは1文字以上、5文字以内で日付IDを入力して")
 	private String dateId;

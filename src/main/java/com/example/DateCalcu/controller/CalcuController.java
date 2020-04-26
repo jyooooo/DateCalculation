@@ -1,6 +1,5 @@
 package com.example.DateCalcu.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.DateCalcu.domain.DomainForm;
 import com.example.DateCalcu.domain.ReferenceDateForm;
+import com.example.DateCalcu.domain.Result;
 import com.example.DateCalcu.service.CalcuService;
+
 @Controller
 
 public class CalcuController {
@@ -21,39 +21,63 @@ public class CalcuController {
 
 
 	@PostMapping("/calcu")
-	public String calcu(@ModelAttribute ("referencedateform") ReferenceDateForm form,Model model) {
+	public String calcu(@ModelAttribute("ReferenceDateForm") ReferenceDateForm form,Model model) {
+
+		System.out.println("calcu処理に入りました");
+
+		//計算基準日と計算式を取得。
+
+//		ReferenceDateForm result=service.calculate(form.getReferenceDate(),calcuService.findAll());
 //
-//		if (result.hasErrors()) {
-//			return "index";
-//		}
-		System.out.println("calcu処理");
+//		List<Result> results = resultForm.getResults();
 
-		List<DomainForm> list = calcuService.findAll();
-		model.addAttribute("Lists",list);
+		//計算基準日と計算式を取得
+		ReferenceDateForm resultForm = new ReferenceDateForm(form.getReferenceDate(), calcuService.findAll());
+		//計算結果を取得
+		List<Result> results = resultForm.getResults();
+
+		//計算基準日と計算式を取得し、calculated(計算結果)にセット
+		results.stream().forEach(e -> e.setCalculated(calcuService.calculate(form.getReferenceDate(), e.getFormula())));
+
+		System.out.println("calcu処理に終了しました");
+
+		model.addAttribute("results", results);
+
+		System.out.println(results);
 
 
-		//日付IDから年,月,日を取得。
-		DomainForm domainform=calcuService.findOne(form.getDateId());
-
-		model.addAttribute("domainform",domainform);
-
-		int year=domainform.getYear();
-
-		int month=domainform.getMonth();
-
-		int date=domainform.getDate();
-
-		//基準日に対して加算減算をする。
-		LocalDate ReferenceDate=form.getReferenceDate();
-
-		ReferenceDate = ReferenceDate.plusYears(year);
-		ReferenceDate = ReferenceDate.plusMonths(month);
-		ReferenceDate = ReferenceDate.plusDays(date);
-		System.out.println(ReferenceDate);
-		model.addAttribute("referencedate", ReferenceDate);
 
 		return "redirect:/";
+
+
 	}
+}
+//		//日付IDから年,月,日を取得。
+//		DomainForm domainform=calcuService.findOne(form.getDateId());
+//
+//		int year=domainform.getYear();
+//
+//		int month=domainform.getMonth();
+//
+//		int date=domainform.getDate();
+//
+//		//基準日に対して加算減算をする。
+//		LocalDate ReferenceDate=form.getReferenceDate();
+//
+//		ReferenceDate= ReferenceDate.plusYears(year);
+//		ReferenceDate = ReferenceDate.plusMonths(month);
+//		ReferenceDate = ReferenceDate.plusDays(date);
+//
+//		System.out.println(ReferenceDate);
+//		Result result=setCalcuresult(String ReferenceDate);
+//
+//		model.addAttribute("referencedate", ReferenceDate);
+
+
+
+
+
+
 
 
 
@@ -74,4 +98,4 @@ public class CalcuController {
 //			return "calcResult";
 //		}
 
-}
+
