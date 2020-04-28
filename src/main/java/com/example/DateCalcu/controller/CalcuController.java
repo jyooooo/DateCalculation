@@ -1,6 +1,6 @@
 package com.example.DateCalcu.controller;
 
-import java.util.List;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.DateCalcu.domain.DomainForm;
 import com.example.DateCalcu.domain.ReferenceDateForm;
-import com.example.DateCalcu.domain.Result;
 import com.example.DateCalcu.service.CalcuService;
 
 @Controller
@@ -19,39 +19,38 @@ public class CalcuController {
 	@Autowired
 	public CalcuService calcuService;
 
-
 	@PostMapping("/calcu")
-	public String calcu(@ModelAttribute("ReferenceDateForm") ReferenceDateForm form,Model model) {
+	public String calcu(@ModelAttribute("ReferenceDateForm") ReferenceDateForm form, DomainForm forms, Model model) {
 
-		System.out.println("calcu処理に入りました");
-
-		//計算基準日と計算式を取得。
-
-//		ReferenceDateForm result=service.calculate(form.getReferenceDate(),calcuService.findAll());
-//
-//		List<Result> results = resultForm.getResults();
 
 		//計算基準日と計算式を取得
-		ReferenceDateForm resultForm = new ReferenceDateForm(form.getReferenceDate(), calcuService.findAll());
-		//計算結果を取得
-		List<Result> results = resultForm.getResults();
+		LocalDate result = calcuService.calculate(form.getReferenceDate(), forms.getDateId());
 
-		//計算基準日と計算式を取得し、calculated(計算結果)にセット
-		results.stream().forEach(e -> e.setCalculated(calcuService.calculate(form.getReferenceDate(), e.getFormula())));
-
-		System.out.println(results);
-
-		model.addAttribute("results", results);
+		System.out.println("計算結果"+result);
 
 
-
-
+		model.addAttribute("results", result);
 
 		return "redirect:/";
 
-
 	}
 }
+//計算基準日と計算式を取得
+//		ReferenceDateForm resultForm = new ReferenceDateForm(form.getReferenceDate(), calcuService.findAll());
+//		System.out.println(calcuService.findAll());
+
+//計算基準日と計算式を取得
+//		ReferenceDateForm resultForm=new ReferenceDateForm(form.getReferenceDate(),forms.getDateId());
+
+
+//		//計算結果を取得
+//		List<Result> results = resultForm.getResults();
+//
+//
+//		//計算基準日と計算式を取得し、calculated(計算結果)にセット
+//		results.stream().forEach(e -> e.setCalculated(calcuService.calculate(form.getReferenceDate(), e.getFormula())));
+//
+//
 //		//日付IDから年,月,日を取得。
 //		DomainForm domainform=calcuService.findOne(form.getDateId());
 //
@@ -73,22 +72,14 @@ public class CalcuController {
 //
 //		model.addAttribute("referencedate", ReferenceDate);
 
-
-
-
-
-
-
-
-
-	//入力フォームのidから計算式を取得して、年・月・日の増減値を取得。
+//入力フォームのidから計算式を取得して、年・月・日の増減値を取得。
 //			WorkDateType workDateType = workDateService.findOneById(form.getId());
 //			model.addAttribute("workDateType", workDateType);
 //			Integer inputAddOrSubYear = workDateType.getInputAddOrSubYear();
 //			Integer inputAddOrSubMonth = workDateType.getInputAddOrSubMonth();
 //			Integer inputAddOrSubDay = workDateType.getInputAddOrSubDay();
 //
-	//	//入力フォームの日付に年・月・日の値の加減を行う。
+//	//入力フォームの日付に年・月・日の値の加減を行う。
 //			LocalDate inputDate = form.getInputDate();
 //			inputDate = inputDate.plusYears(inputAddOrSubYear);
 //			inputDate = inputDate.plusMonths(inputAddOrSubMonth);
@@ -97,5 +88,3 @@ public class CalcuController {
 //			model.addAttribute("inputDate", inputDate);
 //			return "calcResult";
 //		}
-
-

@@ -1,7 +1,6 @@
 package com.example.DateCalcu.domain;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,23 +15,28 @@ public class ReferenceDateForm {
 
 
 		//コンストラクタ
-		public ReferenceDateForm(LocalDate ReferenceDate, List<DomainForm> results) {
 
 
-			this.ReferenceDate = ReferenceDate;
-			this.results = new ArrayList<>();
-
-				results=new ArrayList<>();
-				//List(計算式)から1つずつ取り出して、results(計算結果)に加える
-				results.stream().forEach(r -> this.results.add(convertToResult(r)));
 
 
-		}
+
+//		public ReferenceDateForm(LocalDate ReferenceDate,List<DomainForm> results) {
+//			System.out.println(results);
+//			this.ReferenceDate = ReferenceDate;
+//			this.results = new ArrayList<>();
+//			results=new ArrayList<>();
+//
+//				//List(計算式)から1つずつ取り出して、results(計算結果)に加える
+//				results.stream().forEach(r -> this.results.add(convertToResult(r)));
+//				System.out.println("resultsは"+results);
+//
+//
+//		}
 
 		//計算式を画面用計算結果オブジェクトへ変換
-		public Result convertToResult(DomainForm domainform) {
-				System.out.println("domainformは"+domainform);
-				return new Result(domainform);
+		public Result convertToResult(DomainForm formula) {
+				System.out.println("domainformは"+formula);
+				return new Result(formula);
 			}
 
 

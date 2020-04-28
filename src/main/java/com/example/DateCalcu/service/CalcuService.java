@@ -44,10 +44,11 @@ public class CalcuService {
 	}
 
 	//日付計算を行う
-	public LocalDate calculate(LocalDate ReferenceDate,DomainForm formula) {
+	public LocalDate calculate(LocalDate ReferenceDate,String formula) {
 
 		//日付IDから年,月,日を取得。
-		DomainForm domainform=findOne(formula.getDateId());
+		DomainForm domainform=findOne(formula);
+
 
 		int year=domainform.getYear();
 
@@ -61,9 +62,6 @@ public class CalcuService {
 		ReferenceDate= ReferenceDate.plusYears(year);
 		ReferenceDate = ReferenceDate.plusMonths(month);
 		ReferenceDate = ReferenceDate.plusDays(date);
-
-		System.out.println("計算結果は、、"+ReferenceDate+"です");
-
 
 		return ReferenceDate;
 	}
