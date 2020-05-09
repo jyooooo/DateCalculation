@@ -1,6 +1,7 @@
 package com.example.DateCalcu.service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,8 @@ public class CalcuService {
 		calcuMapper.delete(dateId);
 	}
 
-	//日付計算を行う
-	public LocalDate calculate(LocalDate ReferenceDate,String formula) {
+	//計算基準日と日付IDで日付計算を行う
+	public String calculate(LocalDate ReferenceDate,String formula) {
 
 		//日付IDから年,月,日を取得。
 		DomainForm domainform=findOne(formula);
@@ -56,14 +57,12 @@ public class CalcuService {
 
 		int date=domainform.getDate();
 
-		//基準日に対して加算減算をする。
-//		LocalDate ReferenceDate=ReferenceDate;
-
 		ReferenceDate= ReferenceDate.plusYears(year);
 		ReferenceDate = ReferenceDate.plusMonths(month);
 		ReferenceDate = ReferenceDate.plusDays(date);
 
-		return ReferenceDate;
+		return ReferenceDate.format(DateTimeFormatter.ofPattern("yyyy-M-d"));
+
 	}
 
 }

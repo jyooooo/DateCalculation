@@ -56,8 +56,7 @@
 				<th> 計算式</th>
 				<th>編集</th>
 			</tr>
-			<!-- <tr th:each="Calulations:${Calulation}" th:object="${domain}" > -->
-			<!-- <tr th:each="calc:${Calulation}" > -->
+
 			<tr th:each="calc, stat : ${Calculation}" th:object="${calc}">
 
 				<th th:text="${stat.count}"></th>
@@ -71,6 +70,7 @@
 					<form th:action="@{/{dateId}(dateId=*{dateId})}" th:method="POST">
 						<input type="submit" value="削除">
 					</form></td>
+
 
 
 

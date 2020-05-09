@@ -1,59 +1,53 @@
 package com.example.DateCalcu.domain;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+
+
 public class ReferenceDateForm {
 
-		//計算基準日
-		@DateTimeFormat(pattern = "yyyy-MM-dd")
-		private LocalDate ReferenceDate;
+	//計算基準日
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate ReferenceDate;
 
-		//計算結果
-		private List<Result> results;
+	//計算結果
+	private List<Result> results;
 
+	//コンストラクタ
 
-		//コンストラクタ
+	public ReferenceDateForm(LocalDate ReferenceDate, List<DomainForm> results) {
+		//計算基準日を設定
+		this.ReferenceDate = ReferenceDate;
+		//計算結果List初期化
+		this.results = new ArrayList<>();
+		this.results = new ArrayList<>();
 
-
-
-
-
-//		public ReferenceDateForm(LocalDate ReferenceDate,List<DomainForm> results) {
-//			System.out.println(results);
-//			this.ReferenceDate = ReferenceDate;
-//			this.results = new ArrayList<>();
-//			results=new ArrayList<>();
-//
-//				//List(計算式)から1つずつ取り出して、results(計算結果)に加える
-//				results.stream().forEach(r -> this.results.add(convertToResult(r)));
-//				System.out.println("resultsは"+results);
-//
-//
-//		}
-
-		//計算式を画面用計算結果オブジェクトへ変換
-		public Result convertToResult(DomainForm formula) {
-				System.out.println("domainformは"+formula);
-				return new Result(formula);
-			}
-
-
-		//計算結果取得
-		public List<Result> getResults() {
-
-			return results;
+		for(DomainForm formula :results) {
+			this.results.add(convertToResult(formula));
+		}
 		}
 
+	public Result convertToResult(DomainForm formula) {
+		return new Result(formula);
+	}
 
-		public LocalDate getReferenceDate() {
-			return ReferenceDate;
-		}
 
-		public void setReferenceDate(LocalDate referenceDate) {
-			ReferenceDate = referenceDate;
-		}
+	//計算結果取得
+	public List<Result> getResults() {
 
+		return results;
+	}
+
+	public LocalDate getReferenceDate() {
+		return ReferenceDate;
+	}
+
+	public void setReferenceDate(LocalDate referenceDate) {
+		ReferenceDate = referenceDate;
+	}
 
 }
