@@ -24,7 +24,7 @@ public class ReferenceDateForm {
 		this.ReferenceDate = ReferenceDate;
 		//計算結果List初期化
 		this.results = new ArrayList<>();
-		this.results = new ArrayList<>();
+		results = new ArrayList<>();
 
 		for(DomainForm formula :results) {
 			this.results.add(convertToResult(formula));
