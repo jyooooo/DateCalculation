@@ -21,20 +21,20 @@ public class CalcuController {
 	public CalcuService calcuService;
 
 	@PostMapping("/calcu")
-	public String calcu(@ModelAttribute("ReferenceDateForm") ReferenceDateForm form, DomainForm forms, Model model) {
+	public String calcu(@ModelAttribute("ReferenceDateForm") ReferenceDateForm form,DomainForm forms,Model model) {
 
 		ReferenceDateForm resultForm = new ReferenceDateForm(form.getReferenceDate(), calcuService.findAll());
 
 		//計算結果を取得してListに代入
 		List<Result> results = resultForm.getResults();
-
+		System.out.println("計算結果"+results+"です");
 		//計算結果を設定
-		results.stream().forEach(e -> e.setCalculated(calcuService.calculate(form.getReferenceDate(), forms.getDateId())));
-		System.out.println("計算結果は"+results+"です");
+		results.stream().forEach(e -> e.setCalculated(calcuService.calculate(form.getReferenceDate(), e.getFormula())));
+
 		model.addAttribute("results", results);
 
 
-		return "redirect:/";
+		return "index";
 
 	}
 }

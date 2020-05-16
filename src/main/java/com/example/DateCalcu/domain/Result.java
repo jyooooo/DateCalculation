@@ -1,5 +1,8 @@
 package com.example.DateCalcu.domain;
 
+import java.util.Arrays;
+import java.util.StringJoiner;
+
 public class Result {
 
 	//計算式
@@ -36,6 +39,12 @@ public class Result {
 	//日付名を取得
 	public String getDateName() {
 		return formula.getDateName();
+	}
+	public String getYmdFormula() {
+		int[] ymdFormula = {formula.getYear(), formula.getMonth(), formula.getDate()};
+		StringJoiner joiner = new StringJoiner(" / ");
+		Arrays.stream(ymdFormula).forEach(i -> joiner.add(String.valueOf(i)));
+		return joiner.toString();
 	}
 
 }

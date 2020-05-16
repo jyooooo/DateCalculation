@@ -18,18 +18,21 @@ public class ReferenceDateForm {
 	private List<Result> results;
 
 	//コンストラクタ
-
 	public ReferenceDateForm(LocalDate ReferenceDate, List<DomainForm> results) {
 		//計算基準日を設定
 		this.ReferenceDate = ReferenceDate;
 		//計算結果List初期化
 		this.results = new ArrayList<>();
+		//NullException対策
+		if(results==null) {
 		results = new ArrayList<>();
+		}else {
+			results.stream().forEach(r -> this.results.add(convertToResult(r)));
 
-		for(DomainForm formula :results) {
-			this.results.add(convertToResult(formula));
 		}
+
 		}
+
 
 	public Result convertToResult(DomainForm formula) {
 		return new Result(formula);

@@ -39,7 +39,7 @@ public class CreateController {
 		calcuService.save(domainform);
 		System.out.println(domainform + "が登録されました");
 
-		return "redirect:/";
+		return "index";
 
 		}
 

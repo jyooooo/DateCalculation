@@ -30,12 +30,6 @@
 					<!-- <span th:if="${#fields.hasErrors('ReferenceDate')}" th:errors="*{ReferenceDate}"></span> -->
 
 				</div>
-			<h3>日付IDを入力してください。</h3>
-				<div class="form-group">
-					<input type="text" th:field="${domainForm.dateId}" placeholder="NM01">
-					<!-- <span th:if="${#fields.hasErrors('dateId')}" th:errors="*{dateId}"></span> -->
-
-				</div>
 		</div>
 		<div class="button">
 			  	<input type="submit" value="計算実行">
@@ -57,23 +51,19 @@
 				<th>編集</th>
 			</tr>
 
-			<tr th:each="calc, stat : ${Calculation}" th:object="${calc}">
-
+			<!-- <tr th:each="calc, stat : ${results}" th:object="${calc}"> -->
+				<tr th:each="dateFormula,stat :${results}">
 				<th th:text="${stat.count}"></th>
-				<td th:text="*{dateId}"></td>
-				<td th:text="*{dateName}"></td>
-				<td th:text="${ReferenceDateForm.results}"></td>
-				<td th:text="*{year}+'/'+*{month}+'/'+*{date}"></td>
+				<td th:text="${dateFormula.dateId}"></td>
+				<td th:text="${dateFormula.dateName}"></td>
+				<td th:text="${dateFormula.calculated}"></td>
+				<td th:text="${dateFormula.ymdFormula}"></td>
 
 				<td id="edit">
-				 <a th:href="@{/{dateId}/edit(dateId=*{dateId})}">更新</a>
-					<form th:action="@{/{dateId}(dateId=*{dateId})}" th:method="POST">
+				 <a th:href="@{/{dateId}/edit(dateId=${dateFormula.dateId})}">更新</a>
+					<form th:action="@{/{dateId}(dateId=${dateFormula.dateId})}" th:method="POST">
 						<input type="submit" value="削除">
 					</form></td>
-
-
-
-
 			</tr>
 
 		</table>
