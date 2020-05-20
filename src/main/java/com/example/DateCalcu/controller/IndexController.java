@@ -29,6 +29,7 @@ public class IndexController {
 	@GetMapping("/")
 	public String index(@ModelAttribute("ReferenceDateForm") ReferenceDateForm form,Model model) {
 
+
 		//index.htmlに画面遷移
 		return "index";
 	}
