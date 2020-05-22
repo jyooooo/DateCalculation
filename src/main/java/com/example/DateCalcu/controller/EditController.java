@@ -33,7 +33,7 @@ public class EditController {
 	@PostMapping("/{dateId}/update")
 	public String update(@Validated @ModelAttribute("domainform") DomainForm domainform,
 			BindingResult results, @PathVariable String dateId, Model model) {
-		//バリデーション(更新)
+		//バリデーション
 		if (results.hasErrors()) {
 			return "edit";
 		}

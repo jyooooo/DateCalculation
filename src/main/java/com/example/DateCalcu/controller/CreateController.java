@@ -29,15 +29,13 @@ public class CreateController {
 	@PostMapping("/create")
 	public String create(@Validated @ModelAttribute("domainform")DomainForm domainform,
 			BindingResult result, Model model) {
-		System.out.println(result);
-		//バリデーション(新規)
+			//バリデーション(新規)
 			if (result.hasErrors()) {
 				return "register";
 			}
 
 		//登録処理
 		calcuService.save(domainform);
-		System.out.println(domainform + "が登録されました");
 
 		return "index";
 

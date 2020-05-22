@@ -25,10 +25,9 @@ public class IndexController {
 	}
 
 
-	//全件表示
+	//メイン画面表示
 	@GetMapping("/")
 	public String index(@ModelAttribute("ReferenceDateForm") ReferenceDateForm form,Model model) {
-
 
 		//index.htmlに画面遷移
 		return "index";
