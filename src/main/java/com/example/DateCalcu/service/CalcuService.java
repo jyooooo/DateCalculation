@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.DateCalcu.domain.DomainForm;
 import com.example.DateCalcu.repository.CalcuMapper;
+
 @Service
 public class CalcuService {
 
@@ -34,34 +35,24 @@ public class CalcuService {
 	}
 
 	@Transactional
-    public void update(DomainForm domainform) {
-        calcuMapper.update(domainform);
-    }
-
+	public void update(DomainForm domainform) {
+		calcuMapper.update(domainform);
+	}
 
 	@Transactional
 	public void delete(String dateId) {
 		calcuMapper.delete(dateId);
 	}
 
-	//計算基準日と日付IDで日付計算を行う
-	public String calculate(LocalDate ReferenceDate,DomainForm formula) {
+	//計算基準日と計算式で日付計算を行う
+	public String calculate(String ReferenceDate, DomainForm formula) {
 
-		//日付IDから年,月,日を取得。
-
-
-
-		int year=formula.getYear();
-
-		int month=formula.getMonth();
-
-		int date=formula.getDate();
-
-		ReferenceDate= ReferenceDate.plusYears(year);
-		ReferenceDate = ReferenceDate.plusMonths(month);
-		ReferenceDate = ReferenceDate.plusDays(date);
-
-		return ReferenceDate.format(DateTimeFormatter.ofPattern("yyyy-M-d"));
+		//StringからLocalDate型へ変換
+		LocalDate Date = LocalDate.parse(ReferenceDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		//基準日から年月日を計算
+		LocalDate calculatedDate =
+				Date.plusYears(formula.getYear()).plusMonths(formula.getMonth()).plusDays(formula.getDate());
+		return calculatedDate.format(DateTimeFormatter.ofPattern("yyyy-M-d"));
 
 	}
 
