@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.validation.constraints.Pattern;
 
 
 
 public class ReferenceDateForm {
 
 	//計算基準日
-	@NotBlank(message = "計算基準日を入力してください")
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@NotBlank
+	//1900/1/1〜のみ適用
+	@Pattern(regexp = "((19|[2-9][0-9])[0-9]{2})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])")
 	private String ReferenceDate;
 
 	//計算結果

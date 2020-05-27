@@ -27,8 +27,7 @@
 			<h3>計算の基準となる日付を入力してください。</h3>
 				<div class="form-group">
 					<input type="text" th:field="${ReferenceDateForm.ReferenceDate}" placeholder="2020-01-01">
-					<!-- <span th:if="${#fields.hasErrors('ReferenceDate')}" th:errors="*{ReferenceDate}"></span> -->
-
+					<p th:if="${#fields.hasErrors('ReferenceDateForm.ReferenceDate')}" th:errors="${ReferenceDateForm.ReferenceDate}"></p>
 				</div>
 		</div>
 		<div class="button">
@@ -38,7 +37,6 @@
 			</a>
 		</div>
 	</form>
-
 
 	<div class="table">
 		<table class="table table-hover">
@@ -51,7 +49,6 @@
 				<th>編集</th>
 			</tr>
 
-			<!-- <tr th:each="calc, stat : ${results}" th:object="${calc}"> -->
 				<tr th:each="dateFormula,stat :${results}">
 				<th th:text="${stat.count}"></th>
 				<td th:text="${dateFormula.dateId}"></td>

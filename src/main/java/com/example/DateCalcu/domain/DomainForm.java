@@ -6,12 +6,12 @@ import javax.validation.constraints.Size;
 
 public class DomainForm {
 
-	@NotBlank (message = "日付IDは必須項目です")
-	@Size(min = 1, max = 5, message = "日付IDは1文字以上、5文字以内で日付IDを入力して")
+	@NotBlank(message = "日付IDは必須項目です")
+	@Size(min = 1, max = 5, message = "日付IDは1文字以上、5文字以内で日付IDを入力してください")
 	private String dateId;
 
 	@NotBlank(message = "日付名は必須項目です")
-	@Size(min = 1, max = 5, message = "日付名は1文字以上、5文字以内で日付名を入力して")
+	@Size(min = 1, max = 5, message = "日付名は1文字以上、5文字以内で日付名を入力してください")
 	private String dateName;
 
 
