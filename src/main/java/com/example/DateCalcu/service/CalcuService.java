@@ -52,7 +52,7 @@ public class CalcuService {
 		//基準日から年月日を計算
 		LocalDate calculatedDate =
 				Date.plusYears(formula.getYear()).plusMonths(formula.getMonth()).plusDays(formula.getDate());
-		return calculatedDate.format(DateTimeFormatter.ofPattern("yyyy-M-d"));
+		return calculatedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
 	}
 
