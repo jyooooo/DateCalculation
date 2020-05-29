@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.DateCalcu.domain.DomainForm;
+import com.example.DateCalcu.domain.ReferenceDateForm;
 import com.example.DateCalcu.service.CalcuService;
 
 @Controller
@@ -36,7 +37,7 @@ public class CreateController {
 
 		//登録処理
 		calcuService.save(domainform);
-
+		model.addAttribute("ReferenceDateForm", new ReferenceDateForm());
 		return "index";
 
 		}

@@ -33,6 +33,11 @@ public class ReferenceDateForm {
 		}
 		}
 
+	//コンストラクタ
+	public ReferenceDateForm() {
+
+	}
+
 	public Result convertToResult(DomainForm formula) {
 		return new Result(formula);
 	}
