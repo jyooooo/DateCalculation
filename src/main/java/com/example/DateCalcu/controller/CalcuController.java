@@ -23,7 +23,7 @@ public class CalcuController {
 	public CalcuService calcuService;
 
 	@PostMapping("/calcu")
-	public String calcu(@Validated @ModelAttribute("ReferenceDateForm") ReferenceDateForm form,BindingResult result,DomainForm forms,Model model) {
+	public String calcu(@Validated @ModelAttribute("ReferenceDateForm")  ReferenceDateForm form,BindingResult result,DomainForm forms,Model model) {
 
 		ReferenceDateForm resultForm = new ReferenceDateForm(form.getReferenceDate(), calcuService.findAll());
 		//バリデーション
