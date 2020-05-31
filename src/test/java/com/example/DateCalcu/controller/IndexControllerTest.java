@@ -16,28 +16,26 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 @SpringBootTest
 public class IndexControllerTest {
 
-	 private MockMvc mockMvc;
+	private MockMvc mockMvc;
 
-	 //テスト対象のクラスをDIコンテナに登録
-	  @Autowired
-	  IndexController target;
+	//テスト対象のクラスをDIコンテナに登録
+	@Autowired
+	IndexController target;
 
-	  //このmockMvcインスタンスを利用して、仮想のリクエストを発生させテストを実行する
-	  @Before
-	  public void setup() {
-	    mockMvc = MockMvcBuilders.standaloneSetup(target).build();
-}
+	//このmockMvcインスタンスを利用して、仮想のリクエストを発生させテストを実行する
+	@Before
+	public void setup() {
+		mockMvc = MockMvcBuilders.standaloneSetup(target).build();
+	}
 
-	  @Test
-	    public void メイン画面のリクエスト結果が正常となりViewとしてindexが返る事() throws Exception {
+	@Test
+	public void メイン画面のリクエスト結果が正常となりViewとしてindexが返る事() throws Exception {
 
-	      mockMvc.perform(get("/"))
-	      		//HTTPステータスコードのテスト
-	           .andExpect(status().isOk())
-	           	//指定のviewを返すか？
-	           .andExpect(view().name("index"));
-	    }
-
-
+		mockMvc.perform(get("/"))
+				//HTTPステータスコードのテスト
+				.andExpect(status().isOk())
+				//指定のviewを返すか？
+				.andExpect(view().name("index"));
+	}
 
 }
