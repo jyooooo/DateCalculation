@@ -13,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.example.DateCalcu.domain.DomainForm;
 import com.example.DateCalcu.service.CalcuService;
@@ -29,12 +30,17 @@ public class CreateControllerTest {
 
 	//テスト対象のクラスをDIコンテナに登録
 	@Autowired
-	private CreateController target;
+	CreateController target;
 
 	//このmockMvcインスタンスを利用して、仮想のリクエストを発生させテストを実行する
 	@Before
 	public void setup() {
-		mockMvc = MockMvcBuilders.standaloneSetup(target).build();
+
+		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+		viewResolver.setPrefix("classpath:templates/");
+		viewResolver.setSuffix(".html");
+
+		mockMvc = MockMvcBuilders.standaloneSetup(target).setViewResolvers(viewResolver).build();
 	}
 
 	@Test
@@ -99,6 +105,7 @@ public class CreateControllerTest {
 				//指定のviewを返すか？
 				.andExpect(view().name("register"));
 	}
+
 	@Test
 	public void 新規登録画面の日付名が空白のまま登録処理に移った場合例外情報が入った状態で画面が返る事() throws Exception {
 		DomainForm sut = new DomainForm();
@@ -152,22 +159,24 @@ public class CreateControllerTest {
 				//指定のviewを返すか？
 				.andExpect(view().name("register"));
 	}
+
 	@Test
 	public void 新規登録画面で登録されるとサービスクラスで処理され計算画面に遷移されること() throws Exception {
 		DomainForm sut = new DomainForm();
 
-		sut.setDateId("hoge");
-		sut.setDateId("hoge");
-		sut.setDateId("hoge");
-		sut.setDateId("hoge");
+		sut.setDateId("TEST");
+		sut.setDateName("テスト日付名");
+		sut.setYear(1);
+		sut.setMonth(1);
+		sut.setDate(1);
 
 		mockMvc.perform((post("/create")).flashAttr("form", sut))
-				//エラー判定
-				.andExpect(model().hasNoErrors())
 				.andExpect(model().attribute("form", sut))
+				//HTTPステータスコードのテスト
+				.andExpect(status().isOk())
 				//指定のviewを返すか？
 				.andExpect(view().name("index"));
-		//CalcuService.saveがformというインスタンスを引数に1回呼ばれることをテスト
+		//CalcuService.saveがsutというインスタンスを引数に1回呼ばれることをテスト
 		verify(mockFormService, times(1)).save(sut);
 
 	}
