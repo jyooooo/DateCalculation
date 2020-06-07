@@ -61,6 +61,8 @@ public class CreateControllerTest {
 		mockMvc.perform((post("/create")).flashAttr("form", sut))
 				//エラー判定
 				.andExpect(model().hasErrors())
+				//HTTPステータスコードのテスト
+				.andExpect(status().isOk())
 				//指定のviewを返すか？
 				.andExpect(view().name("register"));
 	}
@@ -75,6 +77,8 @@ public class CreateControllerTest {
 		mockMvc.perform((post("/create")).flashAttr("form", sut))
 				//エラー判定
 				.andExpect(model().hasErrors())
+				//HTTPステータスコードのテスト
+				.andExpect(status().isOk())
 				//指定のviewを返すか？
 				.andExpect(view().name("register"));
 	}
@@ -88,6 +92,8 @@ public class CreateControllerTest {
 		mockMvc.perform((post("/create")).flashAttr("form", sut))
 				//エラー判定
 				.andExpect(model().hasErrors())
+				//HTTPステータスコードのテスト
+				.andExpect(status().isOk())
 				//指定のviewを返すか？
 				.andExpect(view().name("register"));
 	}
@@ -102,6 +108,8 @@ public class CreateControllerTest {
 		mockMvc.perform((post("/create")).flashAttr("form", sut))
 				//エラー判定
 				.andExpect(model().hasErrors())
+				//HTTPステータスコードのテスト
+				.andExpect(status().isOk())
 				//指定のviewを返すか？
 				.andExpect(view().name("register"));
 	}
@@ -115,6 +123,8 @@ public class CreateControllerTest {
 		mockMvc.perform((post("/create")).flashAttr("form", sut))
 				//エラー判定
 				.andExpect(model().hasErrors())
+				//HTTPステータスコードのテスト
+				.andExpect(status().isOk())
 				//指定のviewを返すか？
 				.andExpect(view().name("register"));
 	}
@@ -129,6 +139,8 @@ public class CreateControllerTest {
 		mockMvc.perform((post("/create")).flashAttr("form", sut))
 				//エラー判定
 				.andExpect(model().hasErrors())
+				//HTTPステータスコードのテスト
+				.andExpect(status().isOk())
 				//指定のviewを返すか？
 				.andExpect(view().name("register"));
 	}
@@ -142,6 +154,8 @@ public class CreateControllerTest {
 		mockMvc.perform((post("/create")).flashAttr("form", sut))
 				//エラー判定
 				.andExpect(model().hasErrors())
+				//HTTPステータスコードのテスト
+				.andExpect(status().isOk())
 				//指定のviewを返すか？
 				.andExpect(view().name("register"));
 	}
@@ -156,6 +170,8 @@ public class CreateControllerTest {
 		mockMvc.perform((post("/create")).flashAttr("form", sut))
 				//エラー判定
 				.andExpect(model().hasErrors())
+				//HTTPステータスコードのテスト
+				.andExpect(status().isOk())
 				//指定のviewを返すか？
 				.andExpect(view().name("register"));
 	}
