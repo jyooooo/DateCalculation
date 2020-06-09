@@ -41,7 +41,6 @@ public class EditController {
 		//更新処理
 		domainform.setDateId(dateId);
 		calcuService.update(domainform);
-		System.out.println("日付ID"+dateId+"を更新しました ");
 		return "redirect:/";
 	}
 
