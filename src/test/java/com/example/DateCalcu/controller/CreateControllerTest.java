@@ -1,5 +1,6 @@
 package com.example.DateCalcu.controller;
 
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -10,6 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -20,6 +22,7 @@ import com.example.DateCalcu.service.CalcuService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
+@TestPropertySource(locations = "classpath:test.properties")
 public class CreateControllerTest {
 
 	private MockMvc mockMvc;
@@ -178,22 +181,15 @@ public class CreateControllerTest {
 
 	@Test
 	public void 新規登録画面で登録されるとサービスクラスで処理され計算画面に遷移されること() throws Exception {
-		DomainForm sut = new DomainForm();
 
-		sut.setDateId("TEST");
-		sut.setDateName("テスト日付名");
-		sut.setYear(1);
-		sut.setMonth(1);
-		sut.setDate(1);
+		mockMvc.perform((post("/create")).param("dateId", "テストID").param("dateName", "テスト日付"))
 
-		mockMvc.perform((post("/create")).flashAttr("form", sut))
-				.andExpect(model().attribute("form", sut))
 				//HTTPステータスコードのテスト
 				.andExpect(status().isOk())
 				//指定のviewを返すか？
 				.andExpect(view().name("index"));
-		//CalcuService.saveがsutというインスタンスを引数に1回呼ばれることをテスト
-		verify(mockFormService, times(1)).save(sut);
+
+		verify(mockFormService, times(1)).save(any());
 
 	}
 }
