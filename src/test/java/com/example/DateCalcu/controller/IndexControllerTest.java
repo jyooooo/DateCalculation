@@ -29,7 +29,7 @@ public class IndexControllerTest {
 	}
 
 	@Test
-	public void メイン画面のリクエスト結果が正常となりViewとしてindexが返る事() throws Exception {
+	public void 計算画面のリクエスト結果が正常となりViewとしてindexが返る事() throws Exception {
 
 		mockMvc.perform(get("/"))
 				//HTTPステータスコードのテスト
